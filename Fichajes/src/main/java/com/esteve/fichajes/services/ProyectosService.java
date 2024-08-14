@@ -17,9 +17,8 @@ public class ProyectosService {
         return proyectosRepository.findAll();
     }
 
-    public boolean crear_actualizar_Cliente(Proyectos proyecto){
+    public void crear_actualizar_Proyecto(Proyectos proyecto){
         proyectosRepository.save(proyecto);
-        return true;
     }
 
 }

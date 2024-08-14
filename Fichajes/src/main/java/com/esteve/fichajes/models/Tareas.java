@@ -1,9 +1,15 @@
 package com.esteve.fichajes.models;
 
 import jakarta.persistence.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
-import java.util.Objects;
+import java.util.List;
 
+@Getter
+@Setter
+@EqualsAndHashCode
 @Entity
 @Table(name = "tareas")
 public class Tareas {
@@ -17,72 +23,40 @@ public class Tareas {
     private Float precio_hora;
     @Column(name="coste_hora")
     private Float coste_hora;
+    @Column(name="beneficio_hora")
+    private Float beneficio_hora;
+    @Column(name="total_ventas")
+    private Float total_ventas;
+    @Column(name="total_costes")
+    private Float total_costes;
+    @Column(name="total_beneficios")
+    private Float total_beneficios;
+
     @ManyToOne
     @JoinColumn(name = "proyecto_id")
     private Proyectos proyecto;
     @ManyToOne
     @JoinColumn(name = "servicio_id")
     private Servicios servicio;
+    @OneToMany(mappedBy = "tarea", cascade = CascadeType.ALL)
+    private List<Imputaciones> imputaciones;
 
-    public Tareas(Integer id, String nombre, Float precio_hora, Float coste_hora, Proyectos proyecto, Servicios servicio) {
+    public Tareas(Integer id, Float precio_hora, String nombre, Float coste_hora, Float beneficio_hora, Float total_ventas, Float total_costes, Float total_beneficios, Proyectos proyecto, Servicios servicio, List<Imputaciones> imputaciones) {
         this.id = id;
-        this.nombre = nombre;
         this.precio_hora = precio_hora;
+        this.nombre = nombre;
         this.coste_hora = coste_hora;
+        this.beneficio_hora = beneficio_hora;
+        this.total_ventas = total_ventas;
+        this.total_costes = total_costes;
+        this.total_beneficios = total_beneficios;
         this.proyecto = proyecto;
         this.servicio = servicio;
+        this.imputaciones = imputaciones;
     }
 
     public Tareas() {
 
-    }
-
-    public Servicios getServicio() {
-        return servicio;
-    }
-
-    public void setServicio(Servicios servicio) {
-        this.servicio = servicio;
-    }
-
-    public Proyectos getProyecto() {
-        return proyecto;
-    }
-
-    public void setProyecto(Proyectos proyecto) {
-        this.proyecto = proyecto;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public Float getPrecio_hora() {
-        return precio_hora;
-    }
-
-    public void setPrecio_hora(Float precio_hora) {
-        this.precio_hora = precio_hora;
-    }
-
-    public Float getCoste_hora() {
-        return coste_hora;
-    }
-
-    public void setCoste_hora(Float coste_hora) {
-        this.coste_hora = coste_hora;
     }
 
     @Override
@@ -92,21 +66,12 @@ public class Tareas {
                 ", nombre='" + nombre + '\'' +
                 ", precio_hora=" + precio_hora +
                 ", coste_hora=" + coste_hora +
+                ", beneficio_hora=" + beneficio_hora +
+                ", total_ventas=" + total_ventas +
+                ", total_costes=" + total_costes +
+                ", total_beneficios=" + total_beneficios +
                 ", proyecto=" + proyecto +
                 ", servicio=" + servicio +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Tareas tareas = (Tareas) o;
-        return Objects.equals(id, tareas.id) && Objects.equals(nombre, tareas.nombre) && Objects.equals(precio_hora, tareas.precio_hora) && Objects.equals(coste_hora, tareas.coste_hora) && Objects.equals(proyecto, tareas.proyecto) && Objects.equals(servicio, tareas.servicio);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, nombre, precio_hora, coste_hora, proyecto, servicio);
     }
 }
