@@ -2,6 +2,7 @@ package com.esteve.fichajes;
 
 import com.esteve.fichajes.controllers.ClientesController;
 import com.esteve.fichajes.controllers.ProyectosController;
+import com.esteve.fichajes.controllers.ServiciosController;
 import com.esteve.fichajes.models.*;
 import com.esteve.fichajes.services.*;
 
@@ -22,6 +23,7 @@ public class Main {
         ApplicationContext context = SpringApplication.run(Main.class, args);
         ClientesController clientescontroller = context.getBean(ClientesController.class);
         ProyectosController proyectosController = context.getBean(ProyectosController.class);
+        ServiciosController serviciosController = context.getBean(ServiciosController.class);
 
         Scanner teclado = new Scanner(System.in);
         int opcion = 0;
@@ -115,10 +117,36 @@ public class Main {
                         }
                         break;
                     case 5:
-                        System.out.println("SUUSUS");
+                        List<Servicios> servicios = serviciosController.obtenerTodosLosServicios();
+                        for (Servicios servicio : servicios){
+                            System.out.println(servicio.toString());
+                        }
                         break;
                     case 6:
-                        System.out.println("SUUSUS");
+                        try {
+                            System.out.println("Nombre:");
+                            String nombre = teclado.next();
+                            teclado.nextLine();
+                            System.out.println("Descripcion:");
+                            String descripcion = teclado.nextLine();
+                            System.out.println("Precio hora:");
+                            Float precio_hora = teclado.nextFloat();
+                            System.out.println("Coste hora:");
+                            Float coste_hora = teclado.nextFloat();
+
+                            Servicios ser = new Servicios(null, nombre, descripcion, precio_hora, coste_hora, null);
+
+                            serviciosController.crear_actualizar_Servicio(ser);
+                        }catch (InputMismatchException eme){
+                            System.err.println("Error: Introduce dígitos.");
+                            teclado.next();
+                        }catch (EntityNotFoundException enfe){
+                            System.err.println("Error: " + enfe.getMessage());
+                            teclado.next();
+                        }catch (Exception e){
+                            System.err.println("Error:" + e.getMessage());
+                            teclado.next();
+                        }
                         break;
                     case 7:
                         System.out.println("SUUSUS");
