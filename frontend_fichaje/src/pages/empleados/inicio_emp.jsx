@@ -1,4 +1,3 @@
-
 const InicioEmp = () => {
     return(
         <div>
@@ -7,4 +6,4 @@ const InicioEmp = () => {
     );
 };
 
-export default InicioEmp();
+export default InicioEmp;

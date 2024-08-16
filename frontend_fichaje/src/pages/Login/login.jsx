@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import PropTypes from 'prop-types';
 import LoginForm from './login_form.jsx';
 import './login_css.css';
 import { useNavigate } from 'react-router-dom';
