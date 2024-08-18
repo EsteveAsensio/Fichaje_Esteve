@@ -32,8 +32,10 @@ public class Empleados {
     private String ruta_imagen;
     @OneToMany(mappedBy = "empleado", cascade = CascadeType.ALL)
     private List<Imputaciones> imputaciones;
+    @OneToMany(mappedBy = "empleado_id", cascade = CascadeType.ALL)
+    private List<Sugerencias> sugerencias;
 
-    public Empleados(Integer id, String nombre, String apellidos, String direccion, Integer contacto, String correo, List<Imputaciones> imputaciones, String ruta_imagen) {
+    public Empleados(Integer id, String nombre, String apellidos, String direccion, Integer contacto, String correo, List<Imputaciones> imputaciones, String ruta_imagen, List<Sugerencias> sugerencias) {
         this.id = id;
         this.nombre = nombre;
         this.apellidos = apellidos;
@@ -42,6 +44,7 @@ public class Empleados {
         this.correo = correo;
         this.imputaciones = imputaciones;
         this.ruta_imagen = ruta_imagen;
+        this.sugerencias = sugerencias;
     }
 
     public Empleados() {
