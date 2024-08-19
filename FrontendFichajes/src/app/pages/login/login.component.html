@@ -1,1 +1,19 @@
-<p>login works!</p>
+<div class="app-content">
+  <div class="contenedor">
+      <div class="logo">
+        <h1>Inicio de Sesión</h1>
+        <img src="logo.png" alt="logo" width="30px" height="35px">
+      </div>
+      <form>
+        <div class="grupo">
+          <input class="input-contenido" type="text" id="username" name="username" placeholder="Nombre de usuario" [(ngModel)]="username" required>
+        </div>
+        <div class="grupo">
+          <input class="input-contenido" type="password" id="password" name="password" placeholder="Contraseña" [(ngModel)]="password" required>
+        </div>
+        <div class="grupo-botones">
+          <button type="submit" class="login" (click)="login()">Iniciar Sesión</button>
+        </div>
+      </form>
+    </div>
+</div>
