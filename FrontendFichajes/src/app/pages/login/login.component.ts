@@ -15,7 +15,7 @@ export class LoginComponent {
 
   public username: string = "";
   public password: string = "";
-  private tipo_user: "empleado" | "admin" = "empleado";
+  private tipo_user: "empleado" | "admin" = "admin";
 
   constructor(private router: Router ) {
   }
@@ -24,7 +24,7 @@ export class LoginComponent {
     if(this.tipo_user == "empleado"){
       this.router.navigateByUrl('tecno-logix/fichaje');
     }else if (this.tipo_user == "admin"){
-      this.router.navigateByUrl('tecno-logix/principal')
+      this.router.navigateByUrl('tecno-logix/admin/principal')
     }else{
       console.log("No se ha podido iniciar sesión. Falta de permisos")
     }}
