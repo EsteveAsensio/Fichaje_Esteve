@@ -20,7 +20,7 @@ html, body {
 .contenedor {
   width: 450px;
   padding: 30px 20px;
-  background-color: #1e3a61;
+  background-color: #6ba7e7;
   color: white;
   border-radius: 15px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
@@ -53,7 +53,7 @@ h1 {
 }
 
 .input-contenido:focus {
-  border-color: #6ba7e7;
+  border-color: #1e3a61;
   outline: none;
   box-shadow: 0 0 5px rgba(107, 167, 231, 0.5);
 }
@@ -67,13 +67,14 @@ h1 {
 .login {
   width: 100%;
   padding: 12px;
-  background-color: #6ba7e7;
+  background-color: #1e3a61;
   color: white;
   border: none;
   border-radius: 5px;
   font-size: 16px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  font-weight: bold;
 }
 
 .login:hover {
