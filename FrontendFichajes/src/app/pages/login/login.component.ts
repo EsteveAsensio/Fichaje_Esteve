@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service'
 
 @Component({
   selector: 'app-login',
@@ -15,18 +16,25 @@ export class LoginComponent {
 
   public username: string = "";
   public password: string = "";
-  private tipo_user: "empleado" | "admin" = "admin";
+  errorMessage: string = '';
 
-  constructor(private router: Router ) {
+  constructor(private authService: AuthService, private router: Router ) {
   }
 
-  login(){
-    if(this.tipo_user == "empleado"){
-      this.router.navigateByUrl('tecno-logix/fichaje');
-    }else if (this.tipo_user == "admin"){
-      this.router.navigateByUrl('tecno-logix/admin/principal')
-    }else{
-      console.log("No se ha podido iniciar sesión. Falta de permisos")
-    }}
+  login(): void {
+    this.authService.login(this.username, this.password).subscribe({
+      next: () => {
+        const role = this.authService.getUserRole();
+        if (role === 'ADMIN') {
+          this.router.navigate(['/tecno-logix/admin/principal']);  //administrador
+        } else if (role === 'EMPLOYEE') {
+          this.router.navigate(['/tecno-logix/fichaje']);  //empleado
+        } else {
+          this.errorMessage = 'Rol no reconocido';
+        }
+      },
+      error: () => this.errorMessage = 'Nombre de usuario o contraseña incorrectos'
+    });
+  }
 
 }
